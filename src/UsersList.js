@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./UsersList.css";
 
 
@@ -6,7 +6,7 @@ const UsersList = () => {
     const [formData, setFormData] = useState({
         username: "",
         email: "",
-        usertype: "",
+        usertype: "Admin",
     });
 
     const [users, setUsers] = useState([]);
@@ -41,8 +41,14 @@ const UsersList = () => {
     }
 
 
-
-
+    useEffect(() => {
+        setFilterUsers(users)
+        if (curentfilterUsers === 'all') {
+            setFilterUsers(users)
+        } else {
+            setFilterUsers(users.filter((user) => user.userty === curentfilterUsers));
+        }
+    }, [users])
 
     return (
         <div className="usersList">
